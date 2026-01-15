@@ -1,0 +1,13 @@
+{
+  "name": "infokes",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:frontend": "cd packages/frontend && bun run dev",
+    "dev:backend": "cd packages/backend && bun run dev",
+    "build": "bun run --filter '*' build",
+    "lint": "bun run --filter '*' lint"
+  }
+}
