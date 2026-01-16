@@ -1,0 +1,18 @@
+/* A simple CSS reset and box-sizing boilerplate */
+*, *::before, *::after {
+  box-sizing: border-box; /* Ensures padding/border is included in element's total width/height */
+  margin: 0;           /* Resets default margins */
+  padding: 0;          /* Resets default padding */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

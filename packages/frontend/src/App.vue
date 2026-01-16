@@ -1,11 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { provide } from 'vue'
+import Sidebar from './components/Sidebar.vue'
+import MainContent from './components/MainContent.vue'
+import { useFolderStore, FOLDER_STORE_KEY } from './composables/useFolderStore'
+import { mockFolderData } from './types/folder'
+
+const folderStore = useFolderStore(mockFolderData)
+provide(FOLDER_STORE_KEY, folderStore)
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="app-layout">
+    <Sidebar />
+    <MainContent />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.app-layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+</style>
