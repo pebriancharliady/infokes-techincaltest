@@ -8,29 +8,11 @@ defineProps<{
 </script>
 
 <template>
-  <div class="folders-tree">
-    <Folder
-      v-for="folder in folders"
-      :key="folder.id"
-      :folder="folder"
-      :level="0"
-    />
-    
-    <div v-if="folders.length === 0" class="empty-tree">
+  <div class="py-2">
+    <Folder v-for="folder in folders" :key="folder.id" :folder="folder" :level="0" />
+
+    <div v-if="folders.length === 0" class="p-4 text-center text-neutral-500 text-sm">
       No folders found
     </div>
   </div>
 </template>
-
-<style scoped>
-.folders-tree {
-  padding: 8px 0;
-}
-
-.empty-tree {
-  padding: 16px;
-  text-align: center;
-  color: #888;
-  font-size: 13px;
-}
-</style>

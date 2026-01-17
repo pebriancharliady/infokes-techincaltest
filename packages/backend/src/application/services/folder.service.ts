@@ -10,7 +10,7 @@ export class FolderService {
 
   async getRootFolders(): Promise<FolderDto[]> {
     const folders = await this.folderRepository.findRootFolders()
-    
+
     const result: FolderDto[] = await Promise.all(
       folders.map(async (folder) => ({
         id: folder.id,
@@ -21,7 +21,6 @@ export class FolderService {
         updatedAt: folder.updatedAt
       }))
     )
-    
     return result
   }
 

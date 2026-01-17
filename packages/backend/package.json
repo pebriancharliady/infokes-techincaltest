@@ -8,10 +8,11 @@
     "seed": "bun run src/seeds/seed.ts"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.4.1",
     "elysia": "latest",
-    "typeorm": "^0.3.20",
     "pg": "^8.11.3",
-    "reflect-metadata": "^0.2.1"
+    "reflect-metadata": "^0.2.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "bun-types": "latest",

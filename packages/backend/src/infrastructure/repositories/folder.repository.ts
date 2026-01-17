@@ -1,3 +1,4 @@
+import { IsNull } from 'typeorm'
 import { AppDataSource } from '../../config/database'
 import { Folder } from '../../entities/Folder'
 import { File } from '../../entities/File'
@@ -8,7 +9,7 @@ export class FolderRepository {
 
   async findRootFolders(): Promise<Folder[]> {
     return this.folderRepo.find({
-      where: { parentId: undefined },
+      where: { parentId: IsNull() },
       order: { name: 'ASC' }
     })
   }
@@ -34,7 +35,7 @@ export class FolderRepository {
   async hasChildren(folderId: string): Promise<boolean> {
     const folderCount = await this.folderRepo.count({ where: { parentId: folderId } })
     if (folderCount > 0) return true
-    
+
     const fileCount = await this.fileRepo.count({ where: { folderId } })
     return fileCount > 0
   }

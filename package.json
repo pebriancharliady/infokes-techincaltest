@@ -9,5 +9,8 @@
     "dev:backend": "cd packages/backend && bun run dev",
     "build": "bun run --filter '*' build",
     "lint": "bun run --filter '*' lint"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.1"
   }
 }

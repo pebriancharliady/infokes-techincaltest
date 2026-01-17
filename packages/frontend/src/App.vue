@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import { provide } from 'vue'
-import Sidebar from './components/Sidebar.vue'
-import MainContent from './components/MainContent.vue'
-import { useFolderStore, FOLDER_STORE_KEY } from './composables/useFolderStore'
-import { mockFolderData } from './types/folder'
+import { provide, onMounted } from 'vue'
+import MainContent from './views/MainContent.vue'
+import Sidebar from './views/Sidebar.vue'
+import FilePanel from './views/FilePanel.vue'
+import { useFolderStore, FOLDER_STORE_KEY } from '@/composables/useFolderStore'
 
-const folderStore = useFolderStore(mockFolderData)
+const folderStore = useFolderStore()
 provide(FOLDER_STORE_KEY, folderStore)
+
+onMounted(async () => {
+  await folderStore.fetchRootFolders()
+})
 </script>
 
 <template>
-  <div class="app-layout">
+  <div class="flex w-full h-screen overflow-hidden">
     <Sidebar />
     <MainContent />
+    <FilePanel />
   </div>
 </template>
-
-<style scoped>
-.app-layout {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-</style>
