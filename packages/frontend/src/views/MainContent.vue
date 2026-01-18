@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
-import type { Folder, File } from '@/types/folder'
-import SubFolderList from '../components/SubFolderList.vue'
+import { SubFolderListContainer } from '@/components/SubFolderList'
 import { FOLDER_STORE_KEY, type FolderStore } from '@/composables/useFolderStore'
 
 const folderStore = inject<FolderStore>(FOLDER_STORE_KEY)!
@@ -10,14 +9,6 @@ const childrenCount = computed(() => {
   if (!folderStore.selectedFolder.value) return 0
   return folderStore.selectedFolder.value.children.length
 })
-
-const handleFolderClick = async (folder: Folder) => {
-  await folderStore.selectFolder(folder)
-}
-
-const handleFileClick = async (file: File) => {
-  await folderStore.selectFile(file)
-}
 </script>
 
 <template>
@@ -27,10 +18,6 @@ const handleFileClick = async (file: File) => {
       <h1 class="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
         {{ folderStore.selectedFolder.value?.name || 'Select a folder' }}
       </h1>
-      <div v-if="folderStore.selectedFolder.value" class="text-sm text-neutral-500 flex items-center gap-2">
-        <span v-if="folderStore.isLoading.value">Loading...</span>
-        <span v-else>{{ childrenCount }} item(s)</span>
-      </div>
     </div>
 
     <div class="flex-1 overflow-y-auto p-4">
@@ -51,8 +38,7 @@ const handleFileClick = async (file: File) => {
         <p>Loading contents...</p>
       </div>
 
-      <SubFolderList v-else :folders="folderStore.selectedFolder.value.children" @select-folder="handleFolderClick"
-        @select-file="handleFileClick" />
+      <SubFolderListContainer v-else />
     </div>
   </main>
 </template>

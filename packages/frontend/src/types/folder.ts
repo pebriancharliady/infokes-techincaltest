@@ -13,7 +13,7 @@ export interface Folder {
   type: 'folder'
   children: FolderItem[]
   parentId?: string
-  hasChildren?: boolean
+  childrenCount?: number
 }
 
 export type FolderItem = Folder | File

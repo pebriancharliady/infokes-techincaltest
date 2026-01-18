@@ -2,7 +2,8 @@ export interface FolderDto {
   id: string
   name: string
   type: 'folder'
-  hasChildren: boolean
+  childrenCount: number
+  parentId?: string
   createdAt: Date
   updatedAt: Date
 }
@@ -11,7 +12,7 @@ export interface FileDto {
   id: string
   name: string
   type: 'file'
-  hasChildren: false
+  parentId?: string
   size?: number
   mimeType?: string
   createdAt: Date

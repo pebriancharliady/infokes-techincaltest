@@ -5,7 +5,8 @@ interface FolderApiResponse {
     id: string
     name: string
     type: 'folder'
-    hasChildren: boolean
+    childrenCount: number
+    parentId?: string
     createdAt: string
     updatedAt: string
 }
@@ -14,7 +15,7 @@ interface FileApiResponse {
     id: string
     name: string
     type: 'file'
-    hasChildren: false
+    parentId?: string
     size?: number
     mimeType?: string
     createdAt: string
@@ -29,6 +30,7 @@ function mapApiResponseToFolderItem(item: FolderItemApiResponse): FolderItem {
             id: item.id,
             name: item.name,
             type: 'file',
+            parentId: item.parentId,
             size: item.size,
             mimeType: item.mimeType,
         } as File
@@ -39,30 +41,20 @@ function mapApiResponseToFolderItem(item: FolderItemApiResponse): FolderItem {
         name: item.name,
         type: 'folder',
         children: [],
-        hasChildren: item.hasChildren,
+        parentId: item.parentId,
+        childrenCount: item.childrenCount,
     } as Folder
 }
 
 export const folderService = {
-    /**
-     * Get all root folders
-     */
     async getRootFolders(): Promise<Folder[]> {
         const response = await api.get<{ data: FolderApiResponse[] }>('/api/folders')
         return response.data.map(item => mapApiResponseToFolderItem(item) as Folder)
     },
-
-    /**
-     * Get children of a folder by its ID
-     */
     async getFolderChildren(folderId: string): Promise<FolderItem[]> {
         const response = await api.get<{ data: FolderItemApiResponse[] }>(`/api/folders/${folderId}/children`)
         return response.data.map(mapApiResponseToFolderItem)
     },
-
-    /**
-     * Get a folder with its children loaded
-     */
     async getFolderWithChildren(folderId: string): Promise<Folder> {
         const children = await this.getFolderChildren(folderId)
 

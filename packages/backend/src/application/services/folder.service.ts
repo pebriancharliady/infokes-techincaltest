@@ -16,7 +16,7 @@ export class FolderService {
         id: folder.id,
         name: folder.name,
         type: 'folder' as const,
-        hasChildren: await this.folderRepository.hasChildren(folder.id),
+        childrenCount: await this.folderRepository.getChildrenCount(folder.id),
         createdAt: folder.createdAt,
         updatedAt: folder.updatedAt
       }))
@@ -32,46 +32,43 @@ export class FolderService {
       id: folder.id,
       name: folder.name,
       type: 'folder',
-      hasChildren: await this.folderRepository.hasChildren(folder.id),
+      childrenCount: await this.folderRepository.getChildrenCount(folder.id),
       createdAt: folder.createdAt,
       updatedAt: folder.updatedAt
     }
   }
 
   async getFolderChildren(folderId: string): Promise<FolderItemDto[]> {
-    // Check if folder exists
     const folder = await this.folderRepository.findById(folderId)
     if (!folder) {
       throw new Error('Folder not found')
     }
 
-    // Get child folders
     const childFolders = await this.folderRepository.findChildFolders(folderId)
     const folderDtos: FolderDto[] = await Promise.all(
       childFolders.map(async (f) => ({
         id: f.id,
         name: f.name,
         type: 'folder' as const,
-        hasChildren: await this.folderRepository.hasChildren(f.id),
+        childrenCount: await this.folderRepository.getChildrenCount(f.id),
+        parentId: folderId,
         createdAt: f.createdAt,
         updatedAt: f.updatedAt
       }))
     )
 
-    // Get child files
     const childFiles = await this.folderRepository.findChildFiles(folderId)
     const fileDtos: FileDto[] = childFiles.map((f) => ({
       id: f.id,
       name: f.name,
       type: 'file' as const,
-      hasChildren: false as const,
+      parentId: folderId,
       size: f.size,
       mimeType: f.mimeType,
       createdAt: f.createdAt,
       updatedAt: f.updatedAt
     }))
 
-    // Return folders first, then files
     return [...folderDtos, ...fileDtos]
   }
 }

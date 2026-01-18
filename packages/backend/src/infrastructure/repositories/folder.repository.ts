@@ -32,11 +32,9 @@ export class FolderRepository {
     })
   }
 
-  async hasChildren(folderId: string): Promise<boolean> {
+  async getChildrenCount(folderId: string): Promise<number> {
     const folderCount = await this.folderRepo.count({ where: { parentId: folderId } })
-    if (folderCount > 0) return true
-
     const fileCount = await this.fileRepo.count({ where: { folderId } })
-    return fileCount > 0
+    return folderCount + fileCount
   }
 }

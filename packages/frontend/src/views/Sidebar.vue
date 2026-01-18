@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-import Folders from '../components/Folders.vue'
+import { FoldersContainer } from '@/components/Folder'
 import { FOLDER_STORE_KEY, type FolderStore } from '@/composables/useFolderStore'
 
 const folderStore = inject<FolderStore>(FOLDER_STORE_KEY)!
@@ -21,7 +21,7 @@ const folderStore = inject<FolderStore>(FOLDER_STORE_KEY)!
       <div v-else-if="folderStore.error.value" class="p-4 text-center text-red-600 text-sm dark:text-red-400">
         {{ folderStore.error.value }}
       </div>
-      <Folders v-else :folders="folderStore.folders.value" />
+      <FoldersContainer v-else />
     </div>
   </aside>
 </template>

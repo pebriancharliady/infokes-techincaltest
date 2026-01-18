@@ -1,5 +1,4 @@
 import { AppDataSource } from '../../config/database'
-import { Folder } from '../../entities/Folder'
 import { File } from '../../entities/File'
 
 export class FileRepository {

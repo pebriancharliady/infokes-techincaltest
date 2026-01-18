@@ -24,9 +24,6 @@ function mapApiResponseToFile(data: FileDetailApiResponse): File {
 }
 
 export const fileService = {
-    /**
-     * Get file details by ID
-     */
     async getFileById(fileId: string): Promise<File> {
         const response = await api.get<{ data: FileDetailApiResponse }>(`/api/files/${fileId}`)
         return mapApiResponseToFile(response.data)

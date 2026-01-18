@@ -1,5 +1,5 @@
 import { FileRepository } from '../../infrastructure/repositories/file.repository'
-import type { FolderDto, FileDto, FolderItemDto } from '../dto/folder.dto'
+import type { FileDto } from '../dto/folder.dto'
 
 export class FileService {
   private fileRepository: FileRepository
@@ -16,7 +16,6 @@ export class FileService {
       id: file.id,
       name: file.name,
       type: 'file',
-      hasChildren: false,
       size: file.size,
       mimeType: file.mimeType,
       createdAt: file.createdAt,

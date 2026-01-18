@@ -1,5 +1,7 @@
 ## Infokes
 
+Refer to docs/ for the frontned and backend flow diagrams
+
 ### Setup
 
 ```bash
@@ -26,6 +28,3 @@ Backend:
 ```bash
 bun dev:backend
 ```
-_____
-
-This project was created using `bun init` in bun v0.4.0. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
