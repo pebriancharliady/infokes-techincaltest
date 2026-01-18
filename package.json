@@ -7,8 +7,7 @@
   "scripts": {
     "dev:frontend": "cd packages/frontend && bun run dev",
     "dev:backend": "cd packages/backend && bun run dev",
-    "build": "bun run --filter '*' build",
-    "lint": "bun run --filter '*' lint"
+    "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\""
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.1"
