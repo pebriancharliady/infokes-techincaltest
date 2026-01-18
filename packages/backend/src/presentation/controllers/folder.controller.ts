@@ -34,8 +34,8 @@ export class FolderController {
     try {
       const children = await this.folderService.getFolderChildren(id)
       return { data: children }
-    } catch (error: any) {
-      if (error.message === 'Folder not found') {
+    } catch (error) {
+      if (error instanceof Error && error.message === 'Folder not found') {
         return { error: 'Folder not found', status: 404 }
       }
       console.error('Error fetching folder children:', error)

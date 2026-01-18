@@ -55,14 +55,4 @@ export const folderService = {
         const response = await api.get<{ data: FolderItemApiResponse[] }>(`/api/folders/${folderId}/children`)
         return response.data.map(mapApiResponseToFolderItem)
     },
-    async getFolderWithChildren(folderId: string): Promise<Folder> {
-        const children = await this.getFolderChildren(folderId)
-
-        return {
-            id: folderId,
-            name: '',
-            type: 'folder',
-            children,
-        }
-    },
 }

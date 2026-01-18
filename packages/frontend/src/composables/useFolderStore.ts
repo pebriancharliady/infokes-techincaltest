@@ -114,7 +114,6 @@ export function useFolderStore(): FolderStore {
     selectedFolder.value = folder
     selectedFile.value = undefined
 
-
     if (folder.children.length === 0 && folder.childrenCount !== 0) {
       await fetchFolderChildren(folder)
     }
