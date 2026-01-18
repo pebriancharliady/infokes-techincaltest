@@ -26,5 +26,6 @@ bun dev:frontend
 
 Backend:
 ```bash
+cd packages/backend && bun run seed
 bun dev:backend
 ```
